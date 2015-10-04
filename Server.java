@@ -24,21 +24,22 @@ public class Server {
           ServerSocket serverSocket = new ServerSocket(4000);
           Socket clientSocket = serverSocket.accept();
         try {
-            InputStream in = clientSocket.getInputStream();
-            OutputStream out = clientSocket.getOutputStream();
-            Scanner sc1 = new Scanner(in);
-            PrintWriter writer = new PrintWriter(out, true);
-            String servMove = getMove();
-            writer.println(servMove);
+            BufferedReader in = new BufferedReader(new InputStreamReader
+                (clientSocket.getInputStream()));
+            Scanner scanner = new Scanner(in);
+            PrintWriter out = new PrintWriter(
+                    clientSocket.getOutputStream(), true);
+            String serverMove = getMove();
+            out.println(serverMove);
             
-            PLAYER_NAME = sc1.nextLine();
+            PLAYER_NAME = scanner.nextLine();
             System.out.println(PLAYER_NAME);
             
-            String playerMove = sc1.nextLine();
+            String playerMove = scanner.nextLine();
             System.out.println(playerMove);
             
-            String roundWin = winner(playerMove, servMove);
-            writer.println(roundWin);
+            String roundWin = winner(playerMove, serverMove);
+            out.println(roundWin);
             
             } finally {
                 clientSocket.close();
@@ -62,15 +63,15 @@ public class Server {
         return move;
     }
     
-    public static String winner(String playerMove, String servMove) {
+    public static String winner(String playerMove, String serverMove) {
         String winner;
-        if(servMove.equals(playerMove)) {
+        if(serverMove.equals(playerMove)) {
             winner = "Draw";
-        } else if(servMove.equals("rock") && playerMove.equals("scissors")) {
+        } else if(serverMove.equals("rock") && playerMove.equals("scissors")) {
             winner = "The Server wins!";
-        } else if (servMove.equals("scissors") && playerMove.equals("paper")) {
+        } else if (serverMove.equals("scissors") && playerMove.equals("paper")) {
             winner = "The Server wins!";
-        } else if (servMove.equals("paper") && playerMove.equals("rock")) {
+        } else if (serverMove.equals("paper") && playerMove.equals("rock")) {
             winner = "The Server wins!";
         } else {
             winner = PLAYER_NAME +" wins!";
