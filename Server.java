@@ -42,18 +42,24 @@ public class Server {
                 try {
                     /* get the player name */
                     PLAYER_NAME = scanner.nextLine();
+                    System.out.println(PLAYER_NAME);
                 } catch (NoSuchElementException e) {
                     System.out.println
                         ("Client connection disconnected, exiting....");
                     return;
                 }
-                System.out.println(PLAYER_NAME);
-                /* get the player move */
-                String playerMove = scanner.nextLine();
-                System.out.println(playerMove);
-                /* determine the round winner and put to printwriter */
-                String roundWin = winner(playerMove, serverMove);
-                out.println(roundWin);
+                try {
+                    /* get the player move */
+                    String playerMove = scanner.nextLine();
+                    System.out.println(playerMove);
+                    /* determine the round winner and put to printwriter */
+                    String roundWin = winner(playerMove, serverMove);
+                    out.println(roundWin);
+                } catch (NoSuchElementException e) {
+                    System.out.println
+                        ("Client connection disconnected, exiting....");
+                    return;
+                }
                 /* close the socket when finished */
                } while(true);
             } finally {
