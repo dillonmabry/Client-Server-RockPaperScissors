@@ -13,6 +13,8 @@ import java.util.*;
  * @author Dillon
  */
 public class Client {
+    
+    public static String choices[] = {"rock", "paper", "scissors"};
     public static void main(String[] args) throws IOException {
         try {
             /* create new client socket with open port */
@@ -35,7 +37,14 @@ public class Client {
                     System.out.println("Play rock, paper, or scissors: ");
                     Scanner choiceScanner = new Scanner(System.in);
                     /* player chooses rock, paper, or scissors */
-                    choice = choiceScanner.nextLine();
+                    choice = choiceScanner.nextLine().toLowerCase();
+                    if(!((choice.toLowerCase().equals(choices[0]))
+                            || (choice.toLowerCase().equals(choices[1]))
+                            || (choice.toLowerCase().equals(choices[2])))) {
+                        System.out.println("Invalid choice, please enter"
+                                + " rock, paper, or scissors!");
+                        return;
+                    }
                     out.println(choice);
                     /* get the server choice */
                     String serverChoice = inStream.nextLine();
