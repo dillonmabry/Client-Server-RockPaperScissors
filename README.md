@@ -9,8 +9,8 @@
 - Step 5: Continue following interactions closely, writing out when necessary
 - Step 6: Remember to close sockets whenever finished
 
-**Remember to listen on open ports 
-**Remember to use a correct testing host to test the server (ie, localhost)
+- **Remember to listen on open ports 
+- **Remember to use a correct testing host to test the server (ie, localhost)
 
 That's the basic setup!
 
