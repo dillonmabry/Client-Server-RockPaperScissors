@@ -15,6 +15,11 @@ import java.util.*;
 public class Client {
     
     public static String choices[] = {"rock", "paper", "scissors"};
+    /**
+     * Main method
+     * @param args
+     * @throws IOException 
+     */
     public static void main(String[] args) throws IOException {
         try {
             /* create new client socket with open port */
@@ -28,12 +33,12 @@ public class Client {
                 /* create stream scanner and normal scanner */
                 Scanner inStream = new Scanner(in); 
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Enter name: ");
-                /*player enters name */
-                String player = scanner.nextLine();
-                out.println(player);
-                String choice;
                 do {
+                    System.out.println("Enter name: ");
+                    /*player enters name */
+                    String player = scanner.nextLine();
+                    out.println(player);
+                    String choice;
                     System.out.println("Play rock, paper, or scissors: ");
                     Scanner choiceScanner = new Scanner(System.in);
                     /* player chooses rock, paper, or scissors */
@@ -42,7 +47,7 @@ public class Client {
                             || (choice.toLowerCase().equals(choices[1]))
                             || (choice.toLowerCase().equals(choices[2])))) {
                         System.out.println("Invalid choice, please enter"
-                                + " rock, paper, or scissors!");
+                            + " rock, paper, or scissors!");
                         return;
                     }
                     out.println(choice);
@@ -57,9 +62,21 @@ public class Client {
                     } else {
                         System.out.println(winner);
                     }
+                    System.out.println("");
+                    System.out.println("Do you want to play again? Y/N");
+                    String playAgain = scanner.nextLine();
+                    if(playAgain.toLowerCase().equals("y")) {
+                        continue;
+                    } else if(playAgain.toLowerCase().equals("n")) {
+                        System.out.println("Exiting....");
+                        return;
+                    } else {
+                        System.out.println("Unknown input choice! Exiting....");
+                        return;
+                    }
                 /* perform only while server side has next input */
                 } while(inStream.hasNextLine());
-              /* close socket when finished */
+            /* close socket when finished */
             } finally {
                 clientSocket.close();
             }
@@ -67,6 +84,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+      System.exit(0);
     }
 }
 

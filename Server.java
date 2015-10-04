@@ -16,8 +16,9 @@ public class Server {
     
     private static String PLAYER_NAME;
     
-    /**
+    /** Main method
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
       try {
@@ -25,32 +26,43 @@ public class Server {
           ServerSocket serverSocket = new ServerSocket(4000);
           /* accept the client socket connection */
           Socket clientSocket = serverSocket.accept();
+          System.out.println("Accepted client connection....");
+          /* create in and out using inputstream and outputstream */
+          BufferedReader in = new BufferedReader(new InputStreamReader
+               (clientSocket.getInputStream()));
+          Scanner scanner = new Scanner(in);
+          PrintWriter out = new PrintWriter(
+                clientSocket.getOutputStream(), true);
         try {
-            /* create in and out using inputstream and outputstream */
-            BufferedReader in = new BufferedReader(new InputStreamReader
-                (clientSocket.getInputStream()));
-            Scanner scanner = new Scanner(in);
-            PrintWriter out = new PrintWriter(
-                    clientSocket.getOutputStream(), true);
-            /* get the server move for game */
-            String serverMove = getMove();
-            out.println(serverMove);
-            /* get the player name */
-            PLAYER_NAME = scanner.nextLine();
-            System.out.println(PLAYER_NAME);
-            /* get the player move */
-            String playerMove = scanner.nextLine();
-            System.out.println(playerMove);
-            /* determine the round winner and put to printwriter */
-            String roundWin = winner(playerMove, serverMove);
-            out.println(roundWin);
-            /* close the socket when finished */
+            do {
+                /* get the server move for game */
+                String serverMove = getMove();
+                out.println(serverMove);
+                /* catch exception when client exits */
+                try {
+                    /* get the player name */
+                    PLAYER_NAME = scanner.nextLine();
+                } catch (NoSuchElementException e) {
+                    System.out.println
+                        ("Client connection disconnected, exiting....");
+                    return;
+                }
+                System.out.println(PLAYER_NAME);
+                /* get the player move */
+                String playerMove = scanner.nextLine();
+                System.out.println(playerMove);
+                /* determine the round winner and put to printwriter */
+                String roundWin = winner(playerMove, serverMove);
+                out.println(roundWin);
+                /* close the socket when finished */
+               } while(true);
             } finally {
+                System.out.println("Socket to client connection closed....");
                 clientSocket.close();
             }    
         /* catch any exceptions */
         } catch(IOException e) {
-          e.printStackTrace();
+            e.printStackTrace();
         }
     }
     
