@@ -1,6 +1,12 @@
 ## Client-Server-RockPaperScissors
 ##Simple rock paper scissors game using Java Client/Server interactions
 
+###To Start!
+
+- Run the Server.java for server console interactions
+
+- Run the Client.java to start the game
+
 ###Basics of Java Client/Server socket connections
 
 - Step 1: Create client/server sockets respectively using the ServerSocket and Socket classes
