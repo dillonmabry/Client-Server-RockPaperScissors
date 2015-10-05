@@ -26,11 +26,10 @@ That's the basic setup!
 A simple client/server user interaction using a rock, paper, scissors method/game
 
 ####Known Glitches
--While loops not generated, so once the game is over user must run both the Server/Client drivers respectively
 
--Once the game is over connection is closed for security purposes of the project test
+-If an invalid choice is entered other than "rock", "paper", or "scissors" (case insensitive) program will exit and connection will close
 
--If an invalid choice is entered other than "rock", "paper", or "scissors" (case insensitive) program will exit
+-If invalid player again choice is entered the program will exit and connection will close
 
 **My Links**
 
