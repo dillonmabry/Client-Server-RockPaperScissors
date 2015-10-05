@@ -34,7 +34,10 @@ public class Client {
                 Scanner inStream = new Scanner(in); 
                 Scanner scanner = new Scanner(System.in);
                 do {
-                    System.out.println("Enter name: ");
+                    System.out.println("");
+                    System.out.println("Welcome to rock, paper, scissors!");
+                    System.out.println("");
+                    System.out.println("Enter player name: ");
                     /*player enters name */
                     String player = scanner.nextLine();
                     out.println(player);
