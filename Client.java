@@ -38,17 +38,23 @@ public class Client {
                     /*player enters name */
                     String player = scanner.nextLine();
                     out.println(player);
-                    String choice;
-                    System.out.println("Play rock, paper, or scissors: ");
-                    Scanner choiceScanner = new Scanner(System.in);
-                    /* player chooses rock, paper, or scissors */
-                    choice = choiceScanner.nextLine().toLowerCase();
-                    if(!((choice.toLowerCase().equals(choices[0]))
-                            || (choice.toLowerCase().equals(choices[1]))
-                            || (choice.toLowerCase().equals(choices[2])))) {
-                        System.out.println("Invalid choice, please enter"
-                            + " rock, paper, or scissors!");
-                        return;
+                    String choice = null;
+                    while(true) {
+                        System.out.println("Play rock, paper, or scissors: ");
+                        Scanner choiceScanner = new Scanner(System.in);
+                        /* player chooses rock, paper, or scissors */
+                        choice = choiceScanner.nextLine().toLowerCase();
+                        if(!((choice.toLowerCase().equals(choices[0]))
+                                || (choice.toLowerCase().equals(choices[1]))
+                                || (choice.toLowerCase().equals(choices[2])))) {
+                            System.out.println("Invalid choice, please enter"
+                                + " rock, paper, or scissors!"); 
+                            continue;
+                        } else if (choice.toLowerCase().equals("rock") || 
+                                choice.toLowerCase().equals("paper") || 
+                                choice.toLowerCase().equals("scissors")) {
+                            break;
+                        }   
                     }
                     out.println(choice);
                     /* get the server choice */
@@ -63,16 +69,20 @@ public class Client {
                         System.out.println(winner);
                     }
                     System.out.println("");
-                    System.out.println("Do you want to play again? Y/N");
-                    String playAgain = scanner.nextLine();
-                    if(playAgain.toLowerCase().equals("y")) {
-                        continue;
-                    } else if(playAgain.toLowerCase().equals("n")) {
-                        System.out.println("Exiting....");
-                        return;
-                    } else {
-                        System.out.println("Unknown input choice! Exiting....");
-                        return;
+                    while(true) {
+                        System.out.println("Do you want to play again? Y/N");
+                        String playAgain = scanner.nextLine();
+                        if(playAgain.toLowerCase().equals("y")) {
+                            break;
+                        } else if(playAgain.toLowerCase().equals("n")) {
+                            System.out.println("Exiting....");
+                            System.exit(0);
+                        } else {
+                            System.out.println("");
+                            System.out.println("Unknown input choice! "
+                                    + " Please enter Y or N");
+                            continue;
+                        }
                     }
                 /* perform only while server side has next input */
                 } while(inStream.hasNextLine());
