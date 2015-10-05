@@ -27,9 +27,7 @@ A simple client/server user interaction using a rock, paper, scissors method/gam
 
 ####Known Glitches
 
--If an invalid choice is entered other than "rock", "paper", or "scissors" (case insensitive) program will exit and connection will close
-
--If invalid player again choice is entered the program will exit and connection will close
+-No current known glitches. Contact if you find one.
 
 **My Links**
 
